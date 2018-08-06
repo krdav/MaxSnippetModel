@@ -13,7 +13,7 @@ import lib_paths
 import atchley_factors as vector_representation
 
 
-def load_repertoires(data_dir):
+def _load_repertoires(data_dir):
   repertoires = dict()
   with open(data_dir+'/data/answers.csv', 'r') as keyfile_stream:
     keyfile_reader = csv.DictReader(keyfile_stream, delimiter=',')
@@ -36,6 +36,26 @@ def load_repertoires(data_dir):
         'Sequences': sequences
       }
   return repertoires
+
+
+def load_repertoires(data_file):
+    repertoires = dict()
+    seqs_per_ind = dict()
+    with open(data_file, 'r') as fh:
+        for l in fh:
+            seq, sample_id, diagnosis_id = l.strip().split()
+            if sample_id not in repertoires:
+                repertoires[sample_id] = {
+               'Diagnosis': diagnosis_id,
+               'Sequences': dict()
+            }
+            count = 1.0  # So the true count is actually not used. The count is only used as an indication of zero or more.
+            if seq not in repertoires[sample_id]['Sequences']:
+                repertoires[sample_id]['Sequences'][seq] = count
+            else:
+                repertoires[sample_id]['Sequences'][seq] += count
+    return repertoires
+
 
 def process_repertoires(repertoires, snip_size=6):
   repertoires_snip = {}

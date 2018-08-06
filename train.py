@@ -23,10 +23,13 @@ from model import *
 ##########################################################################################
 
 # Load data
-#
-path_dir = 'PATH_TO_YOUR_TRAINING_DATA'
-samples = dp.load_repertoires(path_dir)
+# 
+path_file = 'CMV_TCR_data_min10k_min10reads_50k_suffled.tab'
+samples = dp.load_repertoires(path_file)
 xs, cs, ys = dp.process_repertoires(samples, snip_size=6)
+print(xs.shape)
+print(cs.shape)
+print(ys.shape)
 
 ##########################################################################################
 # Operators
