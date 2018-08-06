@@ -2,7 +2,7 @@
 
 Changed a few things mainly in `dataplumbing.py`.
 The input file format is simply a tab separated file with three columns:
-```CDR3	subject_id	diagnose_0_or_1
+```CDR3	subject_id	diagnose_0_or_1```
 
 No header should be provided e.g.:
 ```
